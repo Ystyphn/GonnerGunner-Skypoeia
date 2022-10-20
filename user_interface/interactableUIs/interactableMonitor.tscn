@@ -1,0 +1,81 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/fonts/OCRAEXT.TTF" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/images/user_interface/TextureButtons/repairButtonClicked.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/user_interface/TextureProgress/shipHullBarOver.png" type="Texture" id=3]
+[ext_resource path="res://assets/images/user_interface/TextureButtons/repairButtonHovered.png" type="Texture" id=4]
+[ext_resource path="res://assets/images/user_interface/TextureButtons/repairButtonNormal.png" type="Texture" id=5]
+[ext_resource path="res://assets/images/user_interface/TextureProgress/shipHullBarProgress.png" type="Texture" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 8
+outline_color = Color( 0.432687, 0.433354, 0.436523, 1 )
+font_data = ExtResource( 1 )
+
+[node name="InteractableMonitor" type="Node2D"]
+z_index = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+visible = false
+margin_left = -20.0
+margin_top = -26.0
+margin_right = 20.0
+margin_bottom = -7.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="NinePatchRect"]
+margin_right = 40.0
+margin_bottom = 19.0
+mouse_filter = 2
+color = Color( 0.352941, 0.352941, 0.352941, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+anchor_right = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -21.0
+margin_bottom = 10.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.737255, 0.745098, 0.796078, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+text = "HULL"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="NinePatchRect"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = -6.0
+margin_right = -2.0
+margin_bottom = -2.0
+mouse_filter = 2
+max_value = 2500.0
+value = 234.0
+texture_over = ExtResource( 3 )
+texture_progress = ExtResource( 6 )
+
+[node name="TextureButton" type="TextureButton" parent="NinePatchRect"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -19.0
+margin_top = 2.0
+margin_right = -4.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 4, 4 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

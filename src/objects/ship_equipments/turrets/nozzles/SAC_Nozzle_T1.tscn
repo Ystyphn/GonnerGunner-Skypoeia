@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/images/objects/ship_turrets/nozzles/SAC_Nozzle_t1.png" type="Texture" id=1]
+[ext_resource path="res://src/objects/ship_equipments/turrets/nozzles/SAC_Nozzle_T1.gd" type="Script" id=2]
+
+[node name="SAC_Nozzle_T1" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+offset = Vector2( 0, -4 )
+__meta__ = {
+"_editor_description_": "Semi-Automatic Cannon Tier 1"
+}

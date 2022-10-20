@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/images/sprites/buildings/room_100x42_ground_floor.png" type="Texture" id=1]
+
+[node name="MidRoom_B" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PoolVector2Array( -50, -1, -50, -21, 8, -21, 8, -19, -48, -19, -48, -1 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2"]
+polygon = PoolVector2Array( 32, -21, 50, -21, 50, -1, 48, -1, 48, -19, 32, -19 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D3"]
+polygon = PoolVector2Array( -50, 19, 50, 19, 50, 21, -50, 21 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )

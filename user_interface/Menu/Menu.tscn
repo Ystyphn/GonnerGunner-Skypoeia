@@ -1,0 +1,81 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/fonts/OCRAEXT.tres" type="DynamicFont" id=1]
+[ext_resource path="res://user_interface/Menu/menu.gd" type="Script" id=2]
+
+[node name="Menu" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Control/NinePatchRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -160.0
+margin_top = -160.0
+margin_right = 160.0
+margin_bottom = 160.0
+color = Color( 0.27451, 0.282353, 0.294118, 0.694118 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/NinePatchRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 256, 256 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resume" type="Button" parent="Control/NinePatchRect/VBoxContainer"]
+margin_right = 256.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 0, 72 )
+focus_mode = 0
+custom_fonts/font = ExtResource( 1 )
+enabled_focus_mode = 0
+text = "RESUME"
+
+[node name="Options" type="Button" parent="Control/NinePatchRect/VBoxContainer"]
+margin_top = 76.0
+margin_right = 256.0
+margin_bottom = 148.0
+rect_min_size = Vector2( 0, 72 )
+focus_mode = 0
+enabled_focus_mode = 0
+text = "OPTIONS"
+
+[node name="MainMenu" type="Button" parent="Control/NinePatchRect/VBoxContainer"]
+margin_top = 152.0
+margin_right = 256.0
+margin_bottom = 224.0
+rect_min_size = Vector2( 0, 72 )
+focus_mode = 0
+enabled_focus_mode = 0
+text = "MAIN MENU"
+
+[connection signal="pressed" from="Control/NinePatchRect/VBoxContainer/Options" to="." method="_on_Options_pressed"]

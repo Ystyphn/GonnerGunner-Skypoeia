@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/images/effects/black_pixel.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/tilemaps/test_area_sprite.png" type="Texture" id=3]
+[ext_resource path="res://assets/normal_maps/test_bmp.bmp" type="Texture" id=4]
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+// render_mode blend_disabled;
+
+uniform sampler2D normal;
+
+void fragment() {
+	NORMALMAP = texture(normal, UV).rgb;
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/normal = ExtResource( 4 )
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform sampler2D light_texture;
+uniform float brightness = 1.0;
+uniform float contrast = 1.0;
+uniform float saturation = 1.0;
+
+void fragment(){
+	vec3 c = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0).rgb;
+	c.rgb = mix(vec3(0.0), c.rgb, brightness);
+	c.rgb = mix(vec3(0.5), c.rgb, contrast);
+	c.rgb = mix(vec3(dot(vec3(1.0), c.rgb) *0.333333), c.rgb, saturation);
+	
+	COLOR.rgb = c;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/brightness = 1.5
+shader_param/contrast = 2.3
+shader_param/saturation = 0.7
+
+[node name="DumbTest" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 207, 121 )
+current = true
+zoom = Vector2( 0.4, 0.4 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+material = SubResource( 4 )
+position = Vector2( 80, -8 )
+texture = ExtResource( 3 )
+normal_map = ExtResource( 4 )
+centered = false
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 2 )
+position = Vector2( 80, -8 )
+scale = Vector2( 200, 200 )
+texture = ExtResource( 2 )
+centered = false

@@ -1,0 +1,207 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://classes/ship_class/scenes/ShipClass.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/sprites/ships/JB-001/JB-001.png" type="Texture" id=2]
+[ext_resource path="res://src/ships/JB-001/scripts/JB-001.gd" type="Script" id=3]
+[ext_resource path="res://classes/LadderClass/scenes/Ladder1.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/ships/JB-001/scenes/Door.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/ships/JB-001/scenes/JB_001Propulsion.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/ships/JB-001/scenes/JB_001CommandComputer.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/ships/JB-001/scenes/LandingGear.tscn" type="PackedScene" id=8]
+
+[sub_resource type="Animation" id=1]
+resource_name = "exterior_fade_in"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Exterior:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/Railing2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "exterior_fade_out"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Exterior:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/Railing2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="JB-001" groups=[
+"player_group",
+] instance=ExtResource( 1 )]
+collision_layer = 0
+collision_mask = 259
+script = ExtResource( 3 )
+top_speed = 250.0
+top_turrets_paths = {
+}
+bottom_turrets_paths = {
+}
+landing_gears = {
+"LandingGear1": NodePath("LandingGear1"),
+"LandingGear2": NodePath("LandingGear2")
+}
+animation_player_path = NodePath("AnimationPlayer")
+state_machine_path = NodePath("StateMachine")
+
+[node name="CollisionPolygon2D" parent="." index="0"]
+polygon = PoolVector2Array( -99, -45, -107, -30, -107, -19, -110, -19, -110, 40, -110, 41, -106, 45, 3, 45, 103, 45, 110, 38, 110, -16, -76, -16, -76, -14, 107, -14, 107, 11, -76, 11, -76, 13, 107, 13, 107, 38, -101, 38, -101, -32, -96, -43, -76, -43, -76, -41, -6, -41, -17, -45 )
+
+[node name="LandingGear1" parent="." index="1" instance=ExtResource( 8 )]
+position = Vector2( 57, 31 )
+
+[node name="LandingGear2" parent="." index="2" instance=ExtResource( 8 )]
+position = Vector2( -71, 31 )
+
+[node name="InteriorArea" parent="Body" index="0"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionPolygon2D" parent="Body/InteriorArea" index="0"]
+polygon = PoolVector2Array( -13, -41, -76, -41, -76, -43, -96, -43, -101, -31, -101, 37, 107, 38, 107, -13, -13, -14 )
+
+[node name="Propulsions" parent="Body" index="1"]
+position = Vector2( -222, -11 )
+
+[node name="JB_001Propulsion_1" parent="Body/Propulsions" index="0" instance=ExtResource( 6 )]
+position = Vector2( 111, 6 )
+
+[node name="PropulsionParticles" parent="Body/Propulsions/JB_001Propulsion_1" index="1"]
+emitting = false
+
+[node name="JB_001Propulsion_2" parent="Body/Propulsions" index="1" instance=ExtResource( 6 )]
+position = Vector2( 111, 34 )
+
+[node name="PropulsionParticles" parent="Body/Propulsions/JB_001Propulsion_2" index="1"]
+emitting = false
+
+[node name="Railing1" type="Sprite" parent="Body" index="2"]
+position = Vector2( 48, -22 )
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 4
+frame = 5
+
+[node name="Base" type="Sprite" parent="Body" index="3"]
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 4
+frame = 1
+
+[node name="Interior" type="Sprite" parent="Body" index="4"]
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Door" parent="Body" index="5" instance=ExtResource( 5 )]
+position = Vector2( 0, -28 )
+
+[node name="Skeleton" type="Sprite" parent="Body" index="6"]
+z_index = 1
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 4
+frame = 3
+
+[node name="Exterior" type="Sprite" parent="Body" index="7"]
+light_mask = 0
+z_index = 2
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 4
+frame = 4
+
+[node name="Railing2" type="Sprite" parent="Body" index="8"]
+position = Vector2( 48, -19 )
+z_index = 3
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 4
+frame = 6
+
+[node name="Ladder1" parent="Body" index="9" instance=ExtResource( 4 )]
+
+[node name="CollisionShape2D" parent="Body/Ladder1/LadderArea" index="0"]
+position = Vector2( 0, 4 )
+
+[node name="LadderTops_1" parent="Body/Ladder1" index="1"]
+position = Vector2( 0, -19 )
+
+[node name="CollisionShape2D" parent="Body/Ladder1/LadderTops_1" index="0"]
+position = Vector2( 0, 0 )
+
+[node name="LadderTops_2" parent="Body/Ladder1" index="2"]
+position = Vector2( 0, 8 )
+
+[node name="CollisionShape2D" parent="Body/Ladder1/LadderTops_2" index="0"]
+position = Vector2( 0, 0 )
+
+[node name="DeckCollisionKinematicBody" type="KinematicBody2D" parent="Body" index="10"]
+collision_layer = 0
+collision_mask = 516
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Body/DeckCollisionKinematicBody" index="0"]
+rotation = -0.00511308
+polygon = PoolVector2Array( -75.9172, -16.3884, 107.08, -15.4527, 107.091, -17.4527, 110.091, -17.4373, 110.08, -15.4374, 109.804, 38.5619, 102.769, 45.5261, -106.229, 44.4574, -110.208, 40.437, -109.901, -19.5622, -106.901, -19.5468, -106.845, -30.5467, -105.784, -42.5414, -98.7686, -45.5056, -16.7697, -45.0863, -5.79029, -41.0301, -75.7894, -41.3881, -75.7791, -43.388, -95.7789, -43.4903, -100.789, -41.5159, -100.835, -32.516, -101.193, 37.4831, 106.804, 38.5466, 106.927, 14.5469, -76.0706, 13.6112, -76.0553, 10.6113, 106.942, 11.547, 107.065, -12.4527, -75.9325, -13.3884 )
+
+[node name="JB_001CommandComputer" parent="Body/Appliances" index="0" instance=ExtResource( 7 )]
+position = Vector2( -41, -27 )
+
+[node name="PassengerArea" parent="Body" index="12"]
+collision_layer = 0
+collision_mask = 4096
+
+[node name="CollisionPolygon2D" parent="Body/PassengerArea" index="0"]
+polygon = PoolVector2Array( -13, -41, 108, -41, 108, 37, -105, 38, -105, -32, -96, -43, -13, -43 )
+
+[node name="StateMachine" parent="." index="4"]
+initial_state = NodePath("Landed")
+
+[node name="AnimationPlayer" parent="." index="5"]
+anims/exterior_fade_in = SubResource( 1 )
+anims/exterior_fade_out = SubResource( 2 )
+
+[editable path="Body/Propulsions/JB_001Propulsion_1"]
+[editable path="Body/Propulsions/JB_001Propulsion_2"]
+[editable path="Body/Door"]
+[editable path="Body/Ladder1"]

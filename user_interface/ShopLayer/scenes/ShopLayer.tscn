@@ -1,0 +1,74 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/fonts/OCRAEXT.TTF" type="DynamicFontData" id=1]
+[ext_resource path="res://user_interface/ShopLayer/scenes/WeaponTabs.tscn" type="PackedScene" id=2]
+[ext_resource path="res://user_interface/ShopLayer/scripts/shop_layer.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 24
+use_filter = true
+font_data = ExtResource( 1 )
+
+[node name="ShopLayer" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 3 )
+
+[node name="Control" type="Control" parent="."]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_right = -64.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TabContainer" type="TabContainer" parent="Control/MarginContainer"]
+pause_mode = 2
+margin_right = 896.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+tab_align = 0
+
+[node name="Weapons" type="TabContainer" parent="Control/MarginContainer/TabContainer"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 44.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 2 )
+tab_align = 0
+
+[node name="Pistols" parent="Control/MarginContainer/TabContainer/Weapons" instance=ExtResource( 2 )]
+
+[node name="AR" parent="Control/MarginContainer/TabContainer/Weapons" instance=ExtResource( 2 )]
+visible = false
+focus_mode = 2
+
+[node name="SMG" parent="Control/MarginContainer/TabContainer/Weapons" instance=ExtResource( 2 )]
+visible = false
+focus_mode = 2
+
+[node name="SG" parent="Control/MarginContainer/TabContainer/Weapons" instance=ExtResource( 2 )]
+visible = false
+focus_mode = 2

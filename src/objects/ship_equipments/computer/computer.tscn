@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/images/objects/ship_equipments/computer.png" type="Texture" id=1]
+[ext_resource path="res://src/objects/ship_equipments/computer/computer.gd" type="Script" id=2]
+[ext_resource path="res://user_interface/interactableUIs/interactableMonitor.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6, 5 )
+
+[node name="computer" type="Sprite"]
+texture = ExtResource( 1 )
+vframes = 2
+script = ExtResource( 2 )
+
+[node name="computer" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="computer"]
+position = Vector2( 0, 1 )
+shape = SubResource( 1 )
+
+[node name="InteractableMonitor" parent="." instance=ExtResource( 3 )]
+
+[connection signal="body_entered" from="computer" to="." method="_on_computer_body_entered"]
+[connection signal="body_exited" from="computer" to="." method="_on_computer_body_exited"]
+[connection signal="pressed" from="InteractableMonitor/NinePatchRect/TextureButton" to="." method="_on_TextureButton_pressed"]
+
+[editable path="InteractableMonitor"]

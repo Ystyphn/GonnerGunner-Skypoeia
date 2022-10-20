@@ -1,0 +1,51 @@
+{
+"version": "0.1.1-alpha",
+"SA_001": {
+	"nickname": "",
+	"name": "SA_001",
+	"price": 6000,
+	"currency": "coins",
+	"damage": 35,
+	"pierce": 0.75,
+	"max_ammo": 8,
+	"range": 285,
+	"reload_speed": 0.2,
+	"bullet_speed": 425,
+	"shrapnel_count": 8,
+	"spread": 20,
+	"sprite_path": "res://assets/images/sprites/guns/SG/sa_001.png",
+	"iconPath": "res://assets/images/sprites/guns/SG/sa_001.png"
+},
+"SG_A-001": {
+	"nickname": "",
+	"name": "SG_A-001",
+	"price": 6200,
+	"currency": "coins",
+	"damage": 46,
+	"pierce": 1,
+	"max_ammo": 8,
+	"range": 300,
+	"reload_speed": 0.2,
+	"bullet_speed": 425,
+	"shrapnel_count": 6,
+	"spread": 15,
+	"sprite_path": "res://assets/images/sprites/guns/SG/sg_a-001.png",
+	"iconPath": "res://assets/images/sprites/guns/SG/sg_a-001.png"
+},
+"TWINBARREL": {
+	"nickname": "",
+	"name": "TWINBARREL",
+	"price": 6200,
+	"currency": "coins",
+	"damage": 76,
+	"pierce": 1,
+	"max_ammo": 2,
+	"range": 300,
+	"reload_speed": 0.2,
+	"bullet_speed": 425,
+	"shrapnel_count": 12,
+	"spread": 30,
+	"sprite_path": "res://assets/images/sprites/guns/SG/twinbarrel.png",
+	"iconPath": "res://assets/images/sprites/guns/SG/twinbarrel.png"
+}
+}

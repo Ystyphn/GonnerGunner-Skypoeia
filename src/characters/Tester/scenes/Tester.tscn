@@ -1,0 +1,120 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://classes/CharacterClass/scripts/climb.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/characters/Tester/tester.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/effects/lights/white_light_36x36.png" type="Texture" id=3]
+[ext_resource path="res://src/guns/assault_rifle/AR-119/scenes/AR-119.tscn" type="PackedScene" id=4]
+[ext_resource path="res://classes/CharacterClass/scripts/fall.gd" type="Script" id=5]
+[ext_resource path="res://classes/CharacterClass/scripts/character_class.gd" type="Script" id=6]
+[ext_resource path="res://classes/state_machine/scripts/state_machine.gd" type="Script" id=7]
+[ext_resource path="res://classes/CharacterClass/scripts/idle.gd" type="Script" id=8]
+[ext_resource path="res://classes/CharacterClass/scripts/interacting.gd" type="Script" id=9]
+[ext_resource path="res://classes/CharacterClass/scripts/walk.gd" type="Script" id=10]
+[ext_resource path="res://classes/CharacterClass/scripts/jump.gd" type="Script" id=11]
+[ext_resource path="res://classes/CharacterClass/scripts/piloting.gd" type="Script" id=12]
+[ext_resource path="res://src/characters/Tester/scripts/jetpack_node.gd" type="Script" id=13]
+[ext_resource path="res://core/tile_detectors/script/tile_detectors.gd" type="Script" id=14]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5, 10.5 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "idle"
+length = 0.3
+
+[sub_resource type="Animation" id=6]
+length = 0.8
+loop = true
+step = 0.05
+
+[node name="Tester" type="KinematicBody2D" groups=["player_group"]]
+collision_layer = 4100
+collision_mask = 1339
+script = ExtResource( 6 )
+id = "Tester"
+walk_speed = 75
+fall_speed = 50
+jump_strength = -125.0
+health = 125.0
+state_machine_path = NodePath("StateMachine")
+air_speed = 52
+autojump_strength = -115.0
+animation_player_path = NodePath("AnimationPlayer")
+sprite_path = NodePath("Sprite")
+current_weapon_path = NodePath("Sprite/AR-119")
+camera_path = NodePath("Camera2D")
+
+[node name="Inventory" type="Node2D" parent="."]
+
+[node name="JetpackNode" type="Node2D" parent="."]
+script = ExtResource( 13 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 3
+
+[node name="AR-119" parent="Sprite" instance=ExtResource( 4 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 1.5 )
+shape = SubResource( 1 )
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 3 )
+energy = 0.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/idle = SubResource( 7 )
+anims/walk = SubResource( 6 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.6, 0.6 )
+
+[node name="TileDetectors" type="Node2D" parent="."]
+script = ExtResource( 14 )
+
+[node name="Detector1" type="RayCast2D" parent="TileDetectors"]
+position = Vector2( 0, -5 )
+enabled = true
+cast_to = Vector2( 14, 0 )
+
+[node name="Detector2" type="RayCast2D" parent="TileDetectors"]
+position = Vector2( 0, 8 )
+enabled = true
+cast_to = Vector2( 14, 0 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 7 )
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource( 8 )
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource( 10 )
+
+[node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource( 11 )
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
+
+[node name="Climb" type="Node" parent="StateMachine"]
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "This is the state of the character if it is climbing"
+}
+
+[node name="Interacting" type="Node" parent="StateMachine"]
+script = ExtResource( 9 )
+__meta__ = {
+"_editor_description_": "This is the state of the player if he or she is talking to a crew or an NPC"
+}
+
+[node name="Piloting" type="Node" parent="StateMachine"]
+script = ExtResource( 12 )
+__meta__ = {
+"_editor_description_": "This is the state of the player if he or she is piloting the ship"
+}

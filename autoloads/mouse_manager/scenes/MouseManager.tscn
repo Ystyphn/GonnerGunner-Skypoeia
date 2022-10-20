@@ -1,0 +1,21 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://autoloads/mouse_manager/scripts/mouse_manager.gd" type="Script" id=1]
+[ext_resource path="res://assets/images/cursor/hand_cursor.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/cursor/grey_crosshair.png" type="Texture" id=3]
+[ext_resource path="res://assets/images/cursor/normal_cursor.png" type="Texture" id=4]
+[ext_resource path="res://assets/images/cursor/red_crosshair.png" type="Texture" id=5]
+[ext_resource path="res://assets/images/cursor/repair_cursor.png" type="Texture" id=6]
+
+[node name="MouseManager" type="Node"]
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "This manages the mouse cursor"
+}
+cursor_textures = {
+"GreyCrossHair": ExtResource( 3 ),
+"HandCursor": ExtResource( 2 ),
+"NormalCursor": ExtResource( 4 ),
+"RedCrosshair": ExtResource( 5 ),
+"RepairCursor": ExtResource( 6 )
+}

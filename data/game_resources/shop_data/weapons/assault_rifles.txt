@@ -1,0 +1,51 @@
+{
+"version": "0.1.1-alpha",
+"AR_119": {
+	"nickname": "",
+	"name": "AR_119",
+	"price": 6000,
+	"currency": "coins",
+	"damage": 45,
+	"pierce": 1,
+	"max_ammo": 30,
+	"inaccuracy": 5,
+	"range": 400,
+	"firerate": 0.2,
+	"reload_speed": 2.22,
+	"bullet_speed": 425,
+	"sprite_path": "res://assets/images/sprites/guns/AR/ar_119.png",
+	"iconPath": "res://assets/images/icons/assault_rifles/ar_119.png"
+},
+"CEA_3M2A": {
+	"nickname": "",
+	"name": "CEA_3M2A",
+	"price": 6000,
+	"currency": "coins",
+	"damage": 32,
+	"pierce": 1,
+	"max_ammo": 32,
+	"inaccuracy": 3,
+	"range": 450,
+	"firerate": 0.18,
+	"reload_speed": 2.3,
+	"bullet_speed": 425,
+	"sprite_path": "res://assets/images/sprites/guns/AR/cea_3m2a.png",
+	"iconPath": "res://assets/images/icons/assault_rifles/cea_3m2a.png"
+},
+"JG_2203": {
+	"nickname": "",
+	"name": "JG_2203",
+	"price": 6000,
+	"currency": "coins",
+	"damage": 55,
+	"pierce": 1,
+	"max_ammo": 20,
+	"inaccuracy": 4,
+	"range": 450,
+	"firerate": 0.15,
+	"reload_speed": 2,
+	"bullet_speed": 425,
+	"sprite_path": "res://assets/images/sprites/guns/AR/jg_2203.png",
+	"iconPath": "res://assets/images/icons/assault_rifles/jg_2203.png"
+}
+}

@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/objects/guns/scenes/PistolObject/PistolObject.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/images/sprites/guns/SG/sg_a-001.png" type="Texture" id=2]
+[ext_resource path="res://src/objects/guns/scripts/sg_object.gd" type="Script" id=3]
+
+[node name="SGObject" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+speed = 500
+range_ = 125
+max_ammo = 8
+reload_speed = 0.5
+shrapnel_count = 11
+spread = 13.0
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+offset = Vector2( 6, -2 )
+
+[node name="Nozzle" parent="." index="1"]
+position = Vector2( 12, -2 )
+
+[node name="MagPos" parent="." index="3"]
+position = Vector2( -10, 0 )
+
+[node name="reload_speed" parent="." index="4"]
+wait_time = 0.2
+
+[node name="gunfire" parent="." index="7"]
+position = Vector2( 30, -2 )
+scale = Vector2( 1.5, 0.85 )

@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/objects/guns/scenes/PistolObject/PistolObject.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/objects/guns/scripts/auto_gun.gd" type="Script" id=2]
+[ext_resource path="res://assets/images/sprites/guns/AR/cea_3m2a.png" type="Texture" id=3]
+[ext_resource path="res://assets/sounds/sfx/ar_cocking.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/animations/autogun_reload_fin.tres" type="Animation" id=5]
+
+[node name="ARObject" instance=ExtResource( 1 )]
+scale = Vector2( 0.65, 0.65 )
+script = ExtResource( 2 )
+speed = 600
+range_ = 350
+inaccuracy = 2
+reload_speed = 1.65
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 3 )
+vframes = 2
+
+[node name="EjectionPos" parent="." index="2"]
+position = Vector2( 0, -3.07692 )
+
+[node name="MagPos" parent="." index="3"]
+position = Vector2( 7.69231, 3.07692 )
+
+[node name="AnimationPlayer" parent="." index="6"]
+playback_process_mode = 0
+method_call_mode = 1
+anims/reload_finished = ExtResource( 5 )
+
+[node name="gunfire" parent="." index="7"]
+position = Vector2( 27.6923, -3.07692 )
+
+[node name="firerate" type="Timer" parent="." index="8"]
+process_mode = 0
+wait_time = 0.13
+one_shot = true
+
+[node name="AudioStreamPlayer2D" parent="." index="9"]
+stream = ExtResource( 4 )
+bus = "SFX"
+
+[connection signal="timeout" from="reload_speed" to="." method="_on_reload_speed_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

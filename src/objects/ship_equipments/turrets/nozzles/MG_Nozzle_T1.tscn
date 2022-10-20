@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/images/objects/ship_turrets/nozzles/MG_Nozzle_t1.png" type="Texture" id=1]
+[ext_resource path="res://assets/images/effects/gunfires/gun_fire_1.png" type="Texture" id=2]
+[ext_resource path="res://src/objects/ship_equipments/turrets/nozzles/KE_Nozzle.gd" type="Script" id=3]
+[ext_resource path="res://src/objects/bullets/scenes/rect_bullet.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "gunfire"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("gun_fire_1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.01, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="MG_Nozzle_T1" type="Node2D"]
+script = ExtResource( 3 )
+BulletScene = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = 1.5708
+texture = ExtResource( 1 )
+offset = Vector2( 0, -4 )
+vframes = 2
+
+[node name="gun_fire_1" type="Sprite" parent="Sprite"]
+visible = false
+position = Vector2( -7.43094e-07, -17 )
+rotation = -1.5708
+texture = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+method_call_mode = 1
+anims/gunfire = SubResource( 1 )
+
+[node name="Position2D" type="Position2D" parent="Sprite"]
+position = Vector2( 0, -14 )
+
+[node name="firerate" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.1
+
+[connection signal="timeout" from="firerate" to="." method="_on_firerate_timeout"]

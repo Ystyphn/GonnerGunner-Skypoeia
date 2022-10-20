@@ -1,0 +1,85 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://classes/GunClass/scripts/gun_class.gd" type="Script" id=1]
+[ext_resource path="res://classes/state_machine/scripts/state_machine.gd" type="Script" id=2]
+[ext_resource path="res://classes/GunClass/scripts/loaded.gd" type="Script" id=3]
+[ext_resource path="res://classes/GunClass/scripts/reloading.gd" type="Script" id=4]
+[ext_resource path="res://classes/GunClass/scripts/unloaded.gd" type="Script" id=5]
+
+[node name="GunClass" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "This is the main class of the gun scenes
+
+The gun can have more sprite frames. It is because we need to identify if a certain gun is loaded or not
+
+Debugs:
+
+	Bug found when using Input.is_action_pressed():
+		-The gun is spawning 2 bullets at the same time whichs is not desired
+		-So shooting variable is used in order to remove this issue and will only stop shooting if the the shooting variable is set to false"
+}
+firerate = 1.0
+reload_time = 1.0
+sprite_path = NodePath("Sprite")
+animation_player_path = NodePath("AnimationPlayer")
+bullet_spawn_point_path = NodePath("BulletSpawnPoint")
+shell_exit_point_path = NodePath("ShellExitPoint")
+magazine_spawn_point_path = NodePath("MagazinePoint")
+firerate_timer_path = NodePath("FireRate")
+reload_time_timer_path = NodePath("ReloadTime")
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="BulletSpawnPoint" type="Position2D" parent="."]
+__meta__ = {
+"_editor_description_": "This is the spawn point for the bulllets"
+}
+
+[node name="ShellExitPoint" type="Position2D" parent="."]
+__meta__ = {
+"_editor_description_": "This is where the shot shells were ejected"
+}
+
+[node name="MagazinePoint" type="Position2D" parent="."]
+__meta__ = {
+"_editor_description_": "This is where magazine were ejected"
+}
+
+[node name="state_machine" type="Node" parent="."]
+script = ExtResource( 2 )
+initial_state = NodePath("Loaded")
+
+[node name="Loaded" type="Node" parent="state_machine"]
+script = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": "This is the state of the gun if it has ammo and can fire"
+}
+
+[node name="Unloaded" type="Node" parent="state_machine"]
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_description_": "This is the state of the gun if no ammo and cannot fire
+"
+}
+
+[node name="Reloading" type="Node" parent="state_machine"]
+script = ExtResource( 4 )
+__meta__ = {
+"_editor_description_": "This is the state of the gun if it is still reloading"
+}
+
+[node name="FireRate" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
+
+[node name="ReloadTime" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
+__meta__ = {
+"_editor_description_": "This is the timer node for reloading"
+}
+
+[connection signal="timeout" from="FireRate" to="." method="firerate_timeout"]

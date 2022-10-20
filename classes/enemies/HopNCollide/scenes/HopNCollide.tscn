@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://classes/state_machine/scripts/state_machine.gd" type="Script" id=1]
+[ext_resource path="res://core/tile_detectors/script/tile_detectors.gd" type="Script" id=2]
+[ext_resource path="res://assets/images/white_pixel.png" type="Texture" id=3]
+[ext_resource path="res://classes/enemies/HopNCollide/scripts/hnc.gd" type="Script" id=4]
+[ext_resource path="res://classes/enemies/HopNCollide/scripts/idle_state.gd" type="Script" id=5]
+[ext_resource path="res://classes/enemies/HopNCollide/scripts/jump_state.gd" type="Script" id=6]
+[ext_resource path="res://classes/enemies/HopNCollide/scripts/fall_state.gd" type="Script" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5, 5 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 109.018
+
+[node name="HopNCollide" type="KinematicBody2D"]
+script = ExtResource( 4 )
+id = "HopNCollide"
+walk_speed = 75
+jump_strength = -350.0
+state_machine_path = NodePath("StateMachine")
+hop_strength = -210.0
+
+[node name="TileDetectors" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="Detector1" type="RayCast2D" parent="TileDetectors"]
+position = Vector2( 0, -6 )
+cast_to = Vector2( 10, 0 )
+
+[node name="Detector2" type="RayCast2D" parent="TileDetectors"]
+position = Vector2( 0, 1 )
+enabled = true
+cast_to = Vector2( 10, 0 )
+
+[node name="HopTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 5.0
+one_shot = true
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0, 0.309804, 0.541176, 1 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource( 2 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
+
+[node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource( 6 )
+
+[connection signal="timeout" from="HopTimer" to="." method="_on_HopTimer_timeout"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_DetectionArea_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_DetectionArea_body_exited"]

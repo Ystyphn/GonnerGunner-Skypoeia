@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://classes/jetpack/scripts/jetpack.gd" type="Script" id=1]
+[ext_resource path="res://classes/state_machine/scripts/state_machine.gd" type="Script" id=2]
+[ext_resource path="res://classes/jetpack/scripts/off_state.gd" type="Script" id=3]
+[ext_resource path="res://classes/jetpack/scripts/on_state.gd" type="Script" id=4]
+
+[node name="Jetpack" type="Node2D"]
+script = ExtResource( 1 )
+speed = -200.0
+acceleration = 6.0
+
+[node name="Particles2D" type="Particles2D" parent="."]
+
+[node name="RechargeTimer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
+
+[node name="RechargeRate" type="Timer" parent="."]
+process_mode = 0
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 2 )
+initial_state = NodePath("Off")
+
+[node name="Off" type="Node" parent="StateMachine"]
+script = ExtResource( 3 )
+
+[node name="On" type="Node" parent="StateMachine"]
+script = ExtResource( 4 )
+
+[connection signal="timeout" from="RechargeTimer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="RechargeRate" to="." method="_on_RechargeRate_timeout"]

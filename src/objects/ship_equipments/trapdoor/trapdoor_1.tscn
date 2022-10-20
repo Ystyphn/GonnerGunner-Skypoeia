@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/images/objects/misc/trapdoors/trapdoor_1.png" type="Texture" id=1]
+[ext_resource path="res://src/objects/ship_equipments/trapdoor/scripts/trapdoor_1.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 9, 8 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 9, 1 )
+
+[node name="trapdoor_1" type="Area2D"]
+collision_layer = 32
+collision_mask = 1792
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 9, -1 )
+shape = SubResource( 1 )
+
+[node name="trapdoor_1" type="StaticBody2D" parent="."]
+collision_layer = 0
+collision_mask = 263
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="trapdoor_1"]
+position = Vector2( 9, 0 )
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="trapdoor_1"]
+texture = ExtResource( 1 )
+offset = Vector2( 9, -1 )
+vframes = 2
+
+[connection signal="body_entered" from="." to="." method="_on_trapdoor_1_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_trapdoor_1_body_exited"]

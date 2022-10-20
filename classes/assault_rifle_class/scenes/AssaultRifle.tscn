@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://classes/GunClass/scenes/GunClass.tscn" type="PackedScene" id=1]
+[ext_resource path="res://effects/Gunfire1/scenes/Gunfire1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://classes/assault_rifle_class/scripts/assault_rifle.gd" type="Script" id=3]
+
+[node name="AssaultRifle" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+bullet_speed = 650.0
+pierce = 0.1
+crit_chance = 0.2
+crit_multiplier = 1.25
+firerate = 0.17
+reload_time = 2.0
+gunfire_scene = ExtResource( 2 )

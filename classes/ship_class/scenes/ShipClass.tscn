@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://classes/state_machine/scripts/state_machine.gd" type="Script" id=1]
+[ext_resource path="res://classes/ship_class/scripts/ship_class.gd" type="Script" id=2]
+[ext_resource path="res://classes/ship_class/scripts/on_air.gd" type="Script" id=3]
+[ext_resource path="res://classes/ship_class/scripts/active.gd" type="Script" id=4]
+[ext_resource path="res://classes/ship_class/scripts/landed.gd" type="Script" id=5]
+[ext_resource path="res://classes/ship_class/scripts/propulsions.gd" type="Script" id=6]
+
+[node name="ShipClass" type="KinematicBody2D"]
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": "This is the base class for the ships 
+
+If the armor is not yet broken, the damage reductions will be applied to the incoming damages
+
+The ID's of the turrets paths is in left to right order
+
+If the player bought a ship, that ship would supposed to be in the \"player_property\" group
+
+If it was spawned by the game itself, its group will depend on what faction that ship belongs to.
+
+The ship will be damaged if it collides with something at high velocity,
+
+By simply not dropping the landing gear, on active state, the ship will receive an amout of damage, though the damage will be a constant 
+percentage, that means the higher the HP is the higher the damage was."
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="InteriorArea" type="Area2D" parent="Body"]
+__meta__ = {
+"_editor_description_": "This will be responsible for settign the exterior sprite to invisible whenever the player is inside the ship"
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Body/InteriorArea"]
+
+[node name="Propulsions" type="Node2D" parent="Body"]
+script = ExtResource( 6 )
+__meta__ = {
+"_editor_description_": "This is where the propulsions of the ships will be added"
+}
+
+[node name="Appliances" type="Node2D" parent="Body"]
+
+[node name="PassengerArea" type="Area2D" parent="Body"]
+__meta__ = {
+"_editor_description_": "This will be the collision areas to add the entities to the passenger of the ship even though they are not part of the crew"
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Body/PassengerArea"]
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="Landed" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_description_": "When the ship's engine is off and on land
+
+This state is almost the same as player's idle state"
+}
+
+[node name="OnAir" type="Node" parent="StateMachine"]
+script = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": "When the ship is on air and the engine is off
+
+This state is almost the same as the player's falling state."
+}
+
+[node name="Active" type="Node" parent="StateMachine"]
+script = ExtResource( 4 )
+__meta__ = {
+"_editor_description_": "Engine is on gravity is not in effect"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

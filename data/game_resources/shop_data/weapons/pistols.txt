@@ -1,0 +1,51 @@
+{
+"version": "0.1.0-alpha",
+"GS_702": {
+	"nickname": "Try Hard...",
+	"name": "GS_702",
+	"price": 3250,
+	"currency": "coins",
+	"damage": 106,
+	"pierce": 0.1,
+	"max_ammo": 2,
+	"inaccuracy": 0,
+	"range": 240,
+	"firerate": "1 per click",
+	"reload_speed": 1.86,
+	"bullet_speed": 400,
+	"sprite_path": "res://assets/images/sprites/guns/Pistol/gs_702.png",
+	"iconPath": "res://assets/images/sprites/guns/Pistol/gs_702.png"
+},
+"HG_A-01": {
+	"nickname": "",
+	"name": "HG_A-01",
+	"price": 3250,
+	"currency": "coins",
+	"damage": 72,
+	"pierce": 0.1,
+	"max_ammo": 10,
+	"inaccuracy": 0,
+	"range": 400,
+	"firerate": "1 per click",
+	"reload_speed": 1.56,
+	"bullet_speed": 400,
+	"sprite_path": "res://assets/images/sprites/guns/Pistol/hg_a-01.png",
+	"iconPath": "res://assets/images/sprites/guns/Pistol/hg_a-01.png"
+},
+"wanderer_001": {
+	"nickname": "",
+	"name": "wanderer_001",
+	"price": 3250,
+	"currency": "coins",
+	"damage": 80,
+	"pierce": 0.1,
+	"max_ammo": 8,
+	"inaccuracy": 0,
+	"range": 350,
+	"firerate": "1 per click",
+	"reload_speed": 1.67,
+	"bullet_speed": 400,
+	"sprite_path": "res://assets/images/sprites/guns/Pistol/wanderer_001-a.png",
+	"iconPath": "res://assets/images/sprites/guns/Pistol/wanderer_001-a.png"
+}
+}

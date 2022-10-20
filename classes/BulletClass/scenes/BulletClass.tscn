@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://classes/BulletClass/scripts/bullet_class.gd" type="Script" id=1]
+[ext_resource path="res://effects/particles/bullet_crash_effects/scenes/BulletCrashEffect.tscn" type="PackedScene" id=2]
+
+[node name="BulletClass" type="Area2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "This is the base class for all gun bullets but I don't think this will work for cannon projectiles
+
+This bullet will be queued free when reached the max range or hit something
+"
+}
+crash_effect = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="Light2D" type="Light2D" parent="."]

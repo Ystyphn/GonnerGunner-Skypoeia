@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://classes/enemies/WalkNCollide/scripts/walk_n_collide.gd" type="Script" id=1]
+[ext_resource path="res://classes/state_machine/scripts/state_machine.gd" type="Script" id=2]
+[ext_resource path="res://classes/enemies/WalkNCollide/scripts/idle_state.gd" type="Script" id=3]
+[ext_resource path="res://classes/enemies/WalkNCollide/scripts/fall_state.gd" type="Script" id=4]
+[ext_resource path="res://classes/enemies/WalkNCollide/scripts/jump_state.gd" type="Script" id=5]
+[ext_resource path="res://classes/enemies/WalkNCollide/scripts/walk_state.gd" type="Script" id=6]
+[ext_resource path="res://assets/images/white_pixel.png" type="Texture" id=7]
+[ext_resource path="res://core/tile_detectors/script/tile_detectors.gd" type="Script" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5, 11 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 102.0
+
+[node name="WalkNCollide" type="KinematicBody2D"]
+collision_layer = 2
+script = ExtResource( 1 )
+id = "WalkNCollide"
+walk_speed = 78
+jump_strength = -160.0
+state_machine_path = NodePath("StateMachine")
+autojump_strength = -105.0
+
+[node name="TileDetectors" type="Node2D" parent="."]
+script = ExtResource( 8 )
+
+[node name="Detector1" type="RayCast2D" parent="TileDetectors"]
+enabled = true
+cast_to = Vector2( 10, 0 )
+
+[node name="Detector2" type="RayCast2D" parent="TileDetectors"]
+position = Vector2( 0, 7 )
+enabled = true
+cast_to = Vector2( 10, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 0.168627, 0, 1 )
+scale = Vector2( 10, 22 )
+texture = ExtResource( 7 )
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.5, 0.5 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 2 )
+initial_state = NodePath("Idle")
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource( 6 )
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource( 3 )
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource( 4 )
+
+[node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_DetectionArea_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_DetectionArea_body_exited"]

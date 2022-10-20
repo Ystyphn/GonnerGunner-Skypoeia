@@ -1,0 +1,51 @@
+{
+"version": "0.1.1-alpha",
+"PEAKER": {
+	"nickname": "",
+	"name": "PEAKER",
+	"price": 5200,
+	"currency": "coins",
+	"damage": 50,
+	"pierce": 0.1,
+	"max_ammo": 62,
+	"inaccuracy": 6,
+	"range": 325,
+	"firerate": 0.15,
+	"reload_speed": 2.13,
+	"bullet_speed": 425,
+	"sprite_path": "res://assets/images/sprites/guns/SMG/peaker.png",
+	"iconPath": "res://assets/images/icons/SMG/peaker.png"
+},
+"SILBAS_A1": {
+	"nickname": "",
+	"name": "SILBAS_A1",
+	"price": 5200,
+	"currency": "coins",
+	"damage": 48,
+	"pierce": 0.1,
+	"max_ammo": 34,
+	"inaccuracy": 4,
+	"range": 325,
+	"firerate": 0.15,
+	"reload_speed": 1.62,
+	"bullet_speed": 425,
+	"sprite_path": "res://assets/images/sprites/guns/SMG/silbas_a1.png",
+	"iconPath": "res://assets/images/icons/SMG/silbas_a1.png"
+},
+"SMG_MINOW_1": {
+	"nickname": "",
+	"name": "SMG_MINOW_1",
+	"price": 5200,
+	"currency": "coins",
+	"damage": 46,
+	"pierce": 0.1,
+	"max_ammo": 30,
+	"inaccuracy": 2,
+	"range": 360,
+	"firerate": 0.15,
+	"reload_speed": 1.42,
+	"bullet_speed": 425,
+	"sprite_path": "res://assets/images/sprites/guns/SMG/smg_minow_1.png",
+	"iconPath": "res://assets/images/icons/SMG/smg_minow_1.png"
+}
+}

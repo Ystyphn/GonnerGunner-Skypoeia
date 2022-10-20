@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/fonts/OCRAEXT.TTF" type="DynamicFontData" id=1]
+[ext_resource path="res://user_interface/other/user_button/user_button.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+use_filter = true
+font_data = ExtResource( 1 )
+
+[node name="UserButton" type="NinePatchRect"]
+margin_right = 512.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 512, 56 )
+size_flags_horizontal = 3
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.282353, 0.290196, 0.305882, 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Username" type="Label" parent="HBoxContainer"]
+margin_right = 203.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Name"
+valign = 1
+clip_text = true
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+margin_left = 207.0
+margin_right = 512.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer"]
+margin_right = 305.0
+margin_bottom = 56.0
+
+[node name="Play" type="Button" parent="HBoxContainer/MarginContainer/HBoxContainer"]
+margin_top = 8.0
+margin_right = 150.0
+margin_bottom = 48.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "PLAY"
+
+[node name="Delete" type="Button" parent="HBoxContainer/MarginContainer/HBoxContainer"]
+margin_left = 154.0
+margin_top = 8.0
+margin_right = 305.0
+margin_bottom = 48.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "DELETE"

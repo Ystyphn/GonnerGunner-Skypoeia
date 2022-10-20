@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/images/sprites/round_copter/round_copter_spritesheet.png" type="Texture" id=1]
+[ext_resource path="res://src/entities/scripts/round_copter/AI.gd" type="Script" id=2]
+[ext_resource path="res://src/entities/scripts/round_copter/round_copter.gd" type="Script" id=3]
+[ext_resource path="res://src/entities/scripts/round_copter/engine.gd" type="Script" id=4]
+[ext_resource path="res://src/entities/scripts/round_copter/floor_detector.gd" type="Script" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "fly"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 5.0
+height = 2.0
+
+[node name="round_copter" type="KinematicBody2D"]
+show_behind_parent = true
+collision_layer = 2
+collision_mask = 513
+script = ExtResource( 3 )
+speed = 59
+damage = 6
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+vframes = 2
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+anims/fly = SubResource( 1 )
+
+[node name="Position2D" type="Position2D" parent="Sprite"]
+__meta__ = {
+"_gizmo_extents_": 5.0
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 1 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="engine" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="firerate" type="Timer" parent="engine"]
+process_mode = 0
+wait_time = 0.75
+one_shot = true
+
+[node name="AI" type="Node2D" parent="engine"]
+script = ExtResource( 2 )
+
+[node name="RayCast2D" type="RayCast2D" parent="engine"]
+enabled = true
+cast_to = Vector2( 0, 30 )
+collision_mask = 9
+script = ExtResource( 5 )
+
+[connection signal="timeout" from="engine/firerate" to="." method="_on_firerate_timeout"]

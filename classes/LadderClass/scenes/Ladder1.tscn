@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://classes/LadderClass/scripts/ladder.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10, 31 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 1 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 1 )
+
+[node name="Ladder1" type="Node2D"]
+position = Vector2( -89, 4 )
+script = ExtResource( 1 )
+
+[node name="LadderArea" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LadderArea"]
+shape = SubResource( 1 )
+
+[node name="LadderTops_1" type="KinematicBody2D" parent="."]
+collision_layer = 1024
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LadderTops_1"]
+position = Vector2( 0, 8 )
+shape = SubResource( 2 )
+one_way_collision = true
+
+[node name="LadderTops_2" type="KinematicBody2D" parent="."]
+collision_layer = 1024
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LadderTops_2"]
+position = Vector2( 0, -19 )
+shape = SubResource( 3 )
+one_way_collision = true

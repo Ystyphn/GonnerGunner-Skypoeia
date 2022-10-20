@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://classes/assault_rifle_class/scenes/AssaultRifle.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/sprites/guns/assault_rifles/AR-119/AR-119.png" type="Texture" id=2]
+[ext_resource path="res://src/bullets/NormalBullet/scenes/NormalBullet.tscn" type="PackedScene" id=3]
+
+[node name="AR-119" instance=ExtResource( 1 )]
+damage = 40
+max_ammo = 35
+max_range = 400
+bullet_speed = 450.0
+bullet_scene = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2( 1.45833, 0 )
+scale = Vector2( 0.895833, 0.75 )
+texture = ExtResource( 2 )
+offset = Vector2( 2, -1 )
+vframes = 2
+frame = 1
+
+[node name="BulletSpawnPoint" parent="." index="2"]
+position = Vector2( 15, -2 )
+
+[node name="ReloadTime" parent="." index="7"]
+one_shot = false

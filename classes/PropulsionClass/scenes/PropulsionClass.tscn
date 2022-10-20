@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://classes/PropulsionClass/scripts/propulsion_class.gd" type="Script" id=1]
+[ext_resource path="res://classes/state_machine/scripts/state_machine.gd" type="Script" id=2]
+
+[node name="PropulsionClass" type="StaticBody2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "This is the main class for all the propulsions of the ships
+
+By Convention, this node must have 5 sprite frames to determine their health status
+"
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+[node name="PropulsionParticles" type="Particles2D" parent="."]
+__meta__ = {
+"_editor_description_": "This is the particles emitted by the propulsion"
+}
+
+[node name="Light2D" type="Light2D" parent="."]
+
+[node name="PropulsionSprite" type="Sprite" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 2 )
+initial_state = NodePath("Inactive")
+
+[node name="Inactive" type="Node" parent="StateMachine"]
+
+[node name="Active" type="Node" parent="StateMachine"]
+
+[node name="Destroyed" type="Node" parent="StateMachine"]

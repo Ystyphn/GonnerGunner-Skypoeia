@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/images/icons/SMG/silbas_a1.png" type="Texture" id=1]
+[ext_resource path="res://src/objects/guns/scripts/auto_gun.gd" type="Script" id=2]
+[ext_resource path="res://assets/images/effects/gunfires/gun_fire_1.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "gun_fire"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("gun_fire:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="BoomRifle" type="Sprite"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+offset = Vector2( 2, -2 )
+script = ExtResource( 2 )
+damage = 10
+speed = 185
+range_ = 100
+inaccuracy = 5
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 17, -2 )
+__meta__ = {
+"_gizmo_extents_": 5.0
+}
+
+[node name="firerate" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.1
+one_shot = true
+
+[node name="gun_fire" type="Sprite" parent="."]
+position = Vector2( 23, -2 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/gun_fire = SubResource( 1 )
+
+[connection signal="timeout" from="firerate" to="." method="_on_firerate_timeout"]

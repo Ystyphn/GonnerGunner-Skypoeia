@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/parents/scenes/Merchant/Merchant.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/entities/scripts/merchants/arms_dealer/arms_dealer.gd" type="Script" id=2]
+
+[node name="ArmsDealer" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+merchant_name = ""
