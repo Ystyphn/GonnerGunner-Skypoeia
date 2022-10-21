@@ -21,6 +21,7 @@ walk_speed = 75
 jump_strength = -350.0
 state_machine_path = NodePath("StateMachine")
 hop_strength = -210.0
+acceleration = 0.1
 
 [node name="TileDetectors" type="Node2D" parent="."]
 script = ExtResource( 2 )
@@ -36,7 +37,7 @@ cast_to = Vector2( 10, 0 )
 
 [node name="HopTimer" type="Timer" parent="."]
 process_mode = 0
-wait_time = 5.0
+wait_time = 3.5
 one_shot = true
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -54,6 +55,7 @@ shape = SubResource( 2 )
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 1 )
+initial_state = NodePath("Idle")
 
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource( 7 )
@@ -63,6 +65,10 @@ script = ExtResource( 5 )
 
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource( 6 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.5, 0.5 )
 
 [connection signal="timeout" from="HopTimer" to="." method="_on_HopTimer_timeout"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_DetectionArea_body_entered"]

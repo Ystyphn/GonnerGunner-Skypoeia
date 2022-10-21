@@ -12,7 +12,7 @@ func enter(msg:={}):
 func physics_update(delta):
 	if !entity.is_on_floor():
 		entity.velocity.y += Globals.gravity * delta
-	if entity.velocity.y > 0:
+	if entity.velocity.y >= 0:
 		state_machine.transition_to("Fall")
 	
 	entity.velocity.x = entity.target_velocity.x

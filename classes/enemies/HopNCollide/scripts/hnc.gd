@@ -15,13 +15,20 @@ onready var tile_detectors: Node2D = get_node("TileDetectors")
 onready var hop_timer: Timer = get_node("HopTimer")
 
 
+func _ready():
+	DebugConsole.set_debug_object(self)
+
+
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_left"):
 		dir = -1
+		start_hop_timer()
 	elif event.is_action_pressed("ui_right"):
 		dir = 1
+		start_hop_timer()
 	elif event.is_action_pressed("ui_down"):
 		dir = 0
+		stop_hop_timer()
 
 
 func _process(delta):

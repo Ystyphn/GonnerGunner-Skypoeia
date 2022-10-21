@@ -1,9 +1,10 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://scenarios/base_scene/scenes/BaseScene.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/images/tilemaps/gonner_tileset.png" type="Texture" id=2]
 [ext_resource path="res://src/characters/Tester/scenes/Tester.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sprites/backgrounds/1/background_1.png" type="Texture" id=4]
+[ext_resource path="res://classes/enemies/HopNCollide/scenes/HopNCollide.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/sprites/backgrounds/1/mountains.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/backgrounds/1/background_1_modulate_back1.png" type="Texture" id=7]
 [ext_resource path="res://assets/sprites/backgrounds/1/background_2.png" type="Texture" id=8]
@@ -289,8 +290,11 @@ texture = ExtResource( 4 )
 centered = false
 
 [node name="Tester" parent="Entities" index="0" instance=ExtResource( 3 )]
-position = Vector2( 272, 421 )
+position = Vector2( 304, 512 )
 collision_mask = 3385
+
+[node name="Camera2D" parent="Entities/Tester" index="6"]
+current = false
 
 [node name="Detector1" parent="Entities/Tester/TileDetectors" index="0"]
 cast_to = Vector2( 10, 0 )
@@ -298,4 +302,9 @@ cast_to = Vector2( 10, 0 )
 [node name="Detector2" parent="Entities/Tester/TileDetectors" index="1"]
 cast_to = Vector2( 10, 0 )
 
+[node name="HopNCollide" parent="Entities" index="1" instance=ExtResource( 5 )]
+position = Vector2( 816, 520 )
+collision_layer = 2
+
 [editable path="Entities/Tester"]
+[editable path="Entities/HopNCollide"]
